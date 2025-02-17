@@ -1,0 +1,34 @@
+<h1><%= @book.title %></h1>
+<p><strong>Author:</strong> <%= @book.author %></p>
+
+<% if @book.available? %>
+  <!-- Show the borrow button if the book is available -->
+  <%= form_with url: borrow_book_path(@book), method: :post, local: true do |form| %>
+    <%= form.label :borrower_name, "Enter Borrower's Name" %>
+    <%= form.text_field :borrower_name %>
+    <%= form.submit "Borrow", class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <!-- Show the return button if the book is borrowed -->
+  <%= button_to return_book_path(@book), method: :post, class: "btn btn-warning" do %>
+    Return
+  <% end %>
+<% end %>
+
+<h2>Borrowing History</h2>
+<% if @book.borrowing_histories.present? %>
+  <ul>
+    <% @book.borrowing_histories.each do |history| %>
+      <li>
+        <%= history.borrower_name %> borrowed this book on <%= history.borrowed_at.strftime("%B %d, %Y") %>
+        <% if history.returned_at %>
+          and returned it on <%= history.returned_at.strftime("%B %d, %Y") %>.
+        <% else %>
+          (Not yet returned)
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No borrowing history available for this book.</p>
+<% end %>
