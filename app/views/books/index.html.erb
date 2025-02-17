@@ -16,12 +16,17 @@
       <td class="action-buttons">
         <%= link_to "Edit", edit_book_path(book), class: "btn btn-edit" %>
         <%= button_to "Delete", book_path(book), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-delete" %>
-        <% if book.available? %>
-          <%= link_to "Borrow", borrow_book_path(book), method: :post, class: "btn btn-borrow" %>
-        <% else %>
-          <%= link_to "Return", return_book_path(book), method: :post, class: "btn btn-return" %>
-        <% end %>
       </td>
     </tr>
   <% end %>
 </table>
+
+<h2>Search Borrowing History</h2>
+<%= form_with url: borrowing_histories_path, method: :get, local: true do %>
+  <label for="borrower_name">Enter Borrower's Name:</label>
+  <%= text_field_tag :borrower_name, params[:borrower_name], class: "form-control" %>
+  <br>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
+
+

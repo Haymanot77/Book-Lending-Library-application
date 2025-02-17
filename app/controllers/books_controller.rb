@@ -4,7 +4,14 @@ class BooksController < ApplicationController
     # List all books
     def index
       @books = Book.all
+      if params[:borrower_name].present?
+        @borrowing_histories = BorrowingHistory.where("borrower_name LIKE ?", "%#{params[:borrower_name]}%")
+      else
+        @borrowing_histories = BorrowingHistory.all
+      end
     end
+        
+  
   
     # Show a single book (with borrowing info)
     def show
@@ -70,7 +77,13 @@ class BooksController < ApplicationController
         redirect_to @book, alert: "This book is not currently borrowed."
       end
     end
-  
+    def borrowing_history
+      @borrower_name = params[:borrower_name]
+      @borrowing_histories = BorrowingHistory.where(borrower_name: @borrower_name)
+    
+      render "borrowing_history"
+    end
+    
     private
   
     def set_book

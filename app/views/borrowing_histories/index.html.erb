@@ -1,0 +1,26 @@
+<h1>Borrowing History</h1>
+
+<%= form_with url: borrowing_histories_path, method: :get, local: true do %>
+  <label for="borrower_name">Enter Borrower's Name:</label>
+  <%= text_field_tag :borrower_name, params[:borrower_name], class: "form-control" %>
+  <br>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
+
+<% if @borrowing_histories.any? %>
+  <ul>
+    <% @borrowing_histories.each do |history| %>
+      <li>
+        <strong><%= history.borrower_name %></strong> borrowed <%= history.book.title %> on 
+        <%= history.borrowed_at.strftime("%B %d, %Y") %>
+        <% if history.returned_at %>
+          and returned it on <%= history.returned_at.strftime("%B %d, %Y") %>.
+        <% else %>
+          (Not yet returned)
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No borrowing history found.</p>
+<% end %>

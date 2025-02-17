@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   end
   resources :borrowing_histories, only: [:index, :show]
   root "books#index"  
+  get "borrowing_history", to: "books#borrowing_history"
+
 end
