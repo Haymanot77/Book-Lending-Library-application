@@ -14,7 +14,7 @@ Follow these steps to set up the application:
 
 1. **Clone the repository**  
    ```sh
-   git clone <your-github-repository-url>
+   git clone https://github.com/Haymanot77/Book-Lending-Library-application
    cd book-lending-library
 
 2. **Install dependencies**
