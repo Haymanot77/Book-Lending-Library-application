@@ -1,24 +1,27 @@
-# README
+#  Book Lending Library
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a Ruby on Rails application for managing a book lending library.
 
-Things you may want to cover:
+## Requirements
 
-* Ruby version
+- **Ruby version:** `3.2.0`
+- **Rails version:** `8.0.1`
+- **Database:** PostgreSQL (or SQLite for development)
 
-* System dependencies
+##  Setup
 
-* Configuration
+Follow these steps to set up the application:
 
-* Database creation
+1. **Clone the repository**  
+   ```sh
+   git clone <your-github-repository-url>
+   cd book-lending-library
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+2. **Install dependencies**
+    bundle install
+3. **Setup the database**
+   rails db:create db:migrate db:seed
+4. **Start the rails server**
+   rails server
+5. **Run tests **
+   rails test
